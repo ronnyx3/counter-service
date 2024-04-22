@@ -144,7 +144,7 @@ jobs:
         $SSH_COMMAND "sudo chown -R ubuntu:ubuntu /home/ubuntu/counter-service"
 
         # Login to Docker registry
-        $SSH_COMMAND "AWS_ACCESS_KEY_ID=*** AWS_SECRET_ACCESS_KEY=*** aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin $ECR_REGISTRY"
+        $SSH_COMMAND "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin $ECR_REGISTRY"
 
         # Copy docker-compose.yml to EC2 server
         $SCP_COMMAND docker-compose.yml ubuntu@$EC2_HOST:/home/ubuntu/counter-service
