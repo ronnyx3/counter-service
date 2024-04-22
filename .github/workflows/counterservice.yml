@@ -139,7 +139,7 @@ jobs:
         chmod 400 ec2.pem
 
         # SSH, SCP commands
-        SSH_COMMAND="ssh -i ec2.pem -o StrictHostKeyChecking=no -o 'SendEnv AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY' ubuntu@$EC2_HOST"
+        SSH_COMMAND="ssh -i ec2.pem -o StrictHostKeyChecking=no -o 'SendEnv secret.AWS_ACCESS_KEY_ID secret.AWS_SECRET_ACCESS_KEY' ubuntu@$EC2_HOST"
         SCP_COMMAND="scp -i ec2.pem -o StrictHostKeyChecking=no"
 
         #Login to Docker registry
