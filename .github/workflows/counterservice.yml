@@ -134,7 +134,7 @@ jobs:
         $SCP_COMMAND docker-compose.yml root@$EC2_HOST:/root/counter-service
 
         # Pull and run the Docker container on EC2
-        $SSH_COMMAND "cd /root/counter-service && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG && docker-compose -f docker-compose.yml up -d --force-recreate"
+        $SSH_COMMAND "cd /root/counter-service && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG && docker compose -f docker-compose.yml up -d --force-recreate"
 
         # Cleanup PEM key
         rm -f ec2.pem
