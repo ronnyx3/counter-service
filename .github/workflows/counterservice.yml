@@ -139,16 +139,16 @@ jobs:
 
         # SSH, SCP commands
         SSH_COMMAND="ssh -i ec2.pem -o StrictHostKeyChecking=no ubuntu@$EC2_HOST"
-        SCP_COMMAND="scp -i ec2.pem -o StrictHostKeyChecking=no"
+        SCP_COMMAND="sudo scp -i ec2.pem -o StrictHostKeyChecking=no"
 
         # Login to Docker registry
         $SSH_COMMAND "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin $ECR_REGISTRY"
     
         # Copy docker-compose.yml to EC2 server
-        $SCP_COMMAND docker-compose.yml ubuntu@$EC2_HOST:/home/ubuntu/counter-service
+        $SCP_COMMAND sudo docker-compose.yml ubuntu@$EC2_HOST:/home/ubuntu/counter-service
     
         # Pull and run the Docker container on EC2
-        $SSH_COMMAND "cd /home/ubuntu/counter-service && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG && docker-compose -f docker-compose.yml up -d --force-recreate"
+        $SSH_COMMAND " sudo cd /home/ubuntu/counter-service && docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG && docker-compose -f docker-compose.yml up -d --force-recreate"
     
         # Cleanup PEM key
         rm -f ec2.pem
