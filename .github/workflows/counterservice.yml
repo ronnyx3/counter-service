@@ -140,7 +140,7 @@ jobs:
         # SSH, SCP commands
         SSH_COMMAND="ssh -i ec2.pem -o StrictHostKeyChecking=no ubuntu@$EC2_HOST"
         SCP_COMMAND="scp -i ec2.pem -o StrictHostKeyChecking=no"
-        $SSH_COMMAND "chmod 777 /home/ubuntu/counter-service"
+        $SSH_COMMAND "sudo chmod 777 /home/ubuntu/counter-service"
 
         # Login to Docker registry
         $SSH_COMMAND "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin $ECR_REGISTRY"
