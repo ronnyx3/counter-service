@@ -1,2 +1,2 @@
 # counter-service
-For CICD project
+For CICD testing
